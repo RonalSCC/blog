@@ -3,7 +3,7 @@
 ## Articulos
 
 - [x] Un articulo no puede tener un titulo vacio
-- [ ] Un articulo debe tener al menos un bloque
+- [x] Un articulo debe tener al menos un bloque
 - [ ] Un articulo no puede tener más 20 bloques.
 - [ ] Un articulo no puede tener los autores vacios
 - [ ] Un articulo debe tener al menos un autor
