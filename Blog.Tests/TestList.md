@@ -5,9 +5,8 @@
 - [x] Un articulo no puede tener un titulo vacio
 - [x] Un articulo debe tener al menos un bloque
 - [x] Un articulo no puede tener más 20 bloques.
-- [ ] Un articulo no puede tener los autores vacios
-- [ ] Un articulo debe tener al menos un autor
-- [ ] Un articulo debe tener al menos un tag descriptivo de su contenido
+- [x] Un articulo no puede tener los autores vacios
+- [x] Un articulo debe tener al menos un tag descriptivo de su contenido
 - [ ] Un articulo debe conocer su fecha de publicacion
 - [ ] Un articulo debe conocer su fecha de ultima modificacion
 - [ ] Un articulo debe conocer su estado (borrador, publicado, archivado)

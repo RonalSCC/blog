@@ -12,7 +12,7 @@ public class ArticleTests : CommandHandlerTest<InitArticle>
     [InlineData(null)]
     public void Si_CreoUnArticuloConTituloVacio_Debe_GenerarUnaExcepcion(string? title)
     {
-        var caller = () => When(new InitArticle(title, [], []));
+        var caller = () => When(new InitArticle(title, [], [], [new object()]));
 
         caller.Should().ThrowExactly<InitArticleException>().WithMessage(Article.EL_TITULO_NO_PUEDE_SER_VACIO);
     }
@@ -20,7 +20,7 @@ public class ArticleTests : CommandHandlerTest<InitArticle>
     [Fact]
     public void Si_CreoUnArticuloSinBloques_Debe_GenerarUnaExcepcion()
     {
-        var caller = () => When(new InitArticle("Articulo de testing", [], []));
+        var caller = () => When(new InitArticle("Articulo de testing", [], [], [new object()]));
 
         caller.Should().ThrowExactly<InitArticleException>().WithMessage(Article.DEBE_CONTENER_AL_MENOS_UN_BLOQUE);
     }
@@ -34,7 +34,7 @@ public class ArticleTests : CommandHandlerTest<InitArticle>
             bloques.Add(new object());
         }
 
-        var caller = () => When(new InitArticle("Articulo de testing", bloques, []));
+        var caller = () => When(new InitArticle("Articulo de testing", bloques, [], [new object()]));
 
         caller.Should().ThrowExactly<InitArticleException>().WithMessage(Article.NO_PUEDE_TENER_MAS_DE_20_BLOQUES);
     }
@@ -42,11 +42,19 @@ public class ArticleTests : CommandHandlerTest<InitArticle>
     [Fact]
     public void Si_CreoUnArticuloSinAutores_Debe_GenerarUnaExcepcion()
     {
-        var caller = () => When(new InitArticle("Articulo de testing", [new object()], Authors: new List<object>()));
+        var caller = () => When(new InitArticle("Articulo de testing", [new object()], [], [new object()]));;
         
         caller.Should().ThrowExactly<InitArticleException>().WithMessage(Article.DEBE_CONTENER_AL_MENOS_UN_AUTOR);
     }
-    
+
+    [Fact]
+    public void Si_CreoUnArticuloSinTags_Debe_RechazarLaCreacion()
+    {
+        var caller = () => When(new InitArticle("Articulo de testing", [new object()], [new object()], Tags: new List<object>() ));
+
+        caller.Should().ThrowExactly<InitArticleException>()
+            .WithMessage(Article.DEBE_CONTENER_AL_MENOS_UN_TAG_DESCRIPTIVO);
+    }
 }
 
 public class Article
@@ -55,6 +63,7 @@ public class Article
     public const string DEBE_CONTENER_AL_MENOS_UN_BLOQUE = "No se puede crear un articulo sin bloques.";
     public const string EL_TITULO_NO_PUEDE_SER_VACIO = "No se puede crear un articulo con el titulo vacío.";
     public const string DEBE_CONTENER_AL_MENOS_UN_AUTOR = "El articulo debe contener al menos un autor.";
+    public const string DEBE_CONTENER_AL_MENOS_UN_TAG_DESCRIPTIVO = "El articulo debe contener al menos un tag descriptivo.";
 }
 
 public class InitArticleException(string message) : Exception(message);
@@ -67,7 +76,9 @@ public class InitArticleCommandHandler(IEventStore eventStore) : ICommandHandler
 
         AssertIfLengthOfBlocksIsCorrect(command.Block);
 
-        AssertIfLengthOfAuthorsIsCorrect();
+        AssertIfLengthOfAuthorsIsCorrect(command.Authors);
+
+        throw new InitArticleException(Article.DEBE_CONTENER_AL_MENOS_UN_TAG_DESCRIPTIVO);
     }
 
     private static void AssertIfTitleIsEmpty(string title)
@@ -83,10 +94,11 @@ public class InitArticleCommandHandler(IEventStore eventStore) : ICommandHandler
         if(blocks.Count > 20)
             throw new InitArticleException(Article.NO_PUEDE_TENER_MAS_DE_20_BLOQUES);
     }
-    private static void AssertIfLengthOfAuthorsIsCorrect()
+    private static void AssertIfLengthOfAuthorsIsCorrect(List<object> authors)
     {
-        throw new InitArticleException(Article.DEBE_CONTENER_AL_MENOS_UN_AUTOR);
+        if(authors.Count == 0)
+            throw new InitArticleException(Article.DEBE_CONTENER_AL_MENOS_UN_AUTOR);
     }
 }
 
-public record InitArticle(string Title, List<object> Block, List<object> Authors);
+public record InitArticle(string Title, List<object> Block, List<object> Authors, List<object> Tags);
