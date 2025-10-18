@@ -1,4 +1,4 @@
-﻿using Blog.Dominio.Abstractions.EventSourcing;
+﻿using Blog.Abstractions.EventSourcing;
 
 namespace Blog.Tests.Utilities;
 

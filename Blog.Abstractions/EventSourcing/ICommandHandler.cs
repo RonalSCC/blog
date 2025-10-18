@@ -1,4 +1,4 @@
-﻿namespace Blog.Dominio.Abstractions.EventSourcing;
+﻿namespace Blog.Abstractions.EventSourcing;
 
 public interface ICommandHandlerAsync<TCommand>
 {

@@ -1,4 +1,4 @@
-﻿namespace Blog.Dominio.Abstractions.EDA;
+﻿namespace Blog.Abstractions.EDA;
 
 public interface IEventSender
 {

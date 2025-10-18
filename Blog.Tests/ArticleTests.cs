@@ -1,6 +1,6 @@
 ﻿using AwesomeAssertions;
+using Blog.Abstractions.EventSourcing;
 using Blog.Dominio;
-using Blog.Dominio.Abstractions.EventSourcing;
 using Blog.Dominio.Comandos;
 using Blog.Dominio.CommandHandlers;
 using Blog.Dominio.Events;

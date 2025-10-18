@@ -1,5 +1,6 @@
-﻿using Blog.Dominio;
-using Blog.Dominio.Abstractions.EventSourcing;
+﻿using Blog.Abstractions;
+using Blog.Abstractions.EventSourcing;
+using Blog.Dominio;
 
 namespace Blog.Tests.Utilities;
 

@@ -1,4 +1,4 @@
-﻿using Blog.Dominio.Abstractions.EventSourcing;
+﻿using Blog.Abstractions.EventSourcing;
 using Blog.Dominio.Comandos;
 using Blog.Dominio.Events;
 using Blog.Dominio.Exceptions;

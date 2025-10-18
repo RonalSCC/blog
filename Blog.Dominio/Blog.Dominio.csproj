@@ -6,4 +6,13 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Abstractions\EDA\" />
+      <Folder Include="Abstractions\EventSourcing\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Blog.Abstractions\Blog.Abstractions.csproj" />
+    </ItemGroup>
+
 </Project>

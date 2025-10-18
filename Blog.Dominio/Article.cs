@@ -1,4 +1,5 @@
-﻿using Blog.Dominio.Events;
+﻿using Blog.Abstractions;
+using Blog.Dominio.Events;
 
 namespace Blog.Dominio;
 

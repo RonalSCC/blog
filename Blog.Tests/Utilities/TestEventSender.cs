@@ -1,4 +1,4 @@
-﻿using Blog.Dominio.Abstractions.EDA;
+﻿using Blog.Abstractions.EDA;
 
 namespace Blog.Tests.Utilities;
 
