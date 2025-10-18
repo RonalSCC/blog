@@ -9,7 +9,7 @@ public class CommandHandlerTestBase
     /// <summary>
     /// If no explicit aggregateId is provided, this one will be used behind the scenes.
     /// </summary>
-    protected readonly string _aggregateId = Guid.NewGuid().ToString();
+    protected readonly string _aggregateId = Guid.CreateVersion7().ToString();
 
     /// <summary>
     /// A fake, in-memory event store.

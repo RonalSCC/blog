@@ -3,7 +3,7 @@
 public abstract class AggregateRoot
 {
     protected readonly List<object> _uncommittedEvents = new();
-    public Guid Id { get; protected set; }
+    public string Id { get; protected set; }
     public IReadOnlyList<object> UncommittedEvents => _uncommittedEvents.AsReadOnly();
 
     public void ClearUncommittedEvents()
