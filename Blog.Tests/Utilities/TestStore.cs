@@ -1,4 +1,7 @@
-﻿namespace Blog.Tests.Utilities;
+﻿using Blog.Dominio;
+using Blog.Dominio.Abstractions.EventSourcing;
+
+namespace Blog.Tests.Utilities;
 
 public class TestStore : IEventStore
 {

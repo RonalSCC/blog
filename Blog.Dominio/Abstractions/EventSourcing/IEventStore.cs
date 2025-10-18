@@ -1,4 +1,4 @@
-﻿namespace Blog.Tests.Utilities;
+﻿namespace Blog.Dominio.Abstractions.EventSourcing;
 
 public interface IEventStore
 {
@@ -29,7 +29,7 @@ public interface IEventStore
     void Save(AggregateRoot aggregateRoot);
 
     /// <summary>
-    /// Obtiene un <see cref="AggregateRoot"/> por su ID.
+    /// Obtiene un <see cref="Blog.Tests.Utilities.AggregateRoot"/> por su ID.
     /// </summary>
     /// <param name="aggregateId"></param>
     /// <param name="cancellationToken"></param>
@@ -39,7 +39,7 @@ public interface IEventStore
         CancellationToken cancellationToken) where TAggregateRoot : AggregateRoot, new();
     
     /// <summary>
-    /// Obtiene un <see cref="AggregateRoot"/> por su ID como <see cref="Guid"/>.
+    /// Obtiene un <see cref="Blog.Tests.Utilities.AggregateRoot"/> por su ID como <see cref="Guid"/>.
     /// </summary>
     /// <param name="aggregateId"></param>
     /// <param name="cancellationToken"></param>
@@ -49,7 +49,7 @@ public interface IEventStore
         CancellationToken cancellationToken) where TAggregateRoot : AggregateRoot, new();
 
     /// <summary>
-    /// Obtiene un <see cref="AggregateRoot"/> por su ID y versión.
+    /// Obtiene un <see cref="Blog.Tests.Utilities.AggregateRoot"/> por su ID y versión.
     /// </summary>
     /// <param name="aggregateId"></param>
     /// <param name="version"></param>
@@ -60,7 +60,7 @@ public interface IEventStore
         int version, CancellationToken cancellationToken) where TAggregateRoot : AggregateRoot, new();
 
     /// <summary>
-    /// Obtiene un <see cref="AggregateRoot"/> por su ID como <see cref="Guid"/> y versión.
+    /// Obtiene un <see cref="Blog.Tests.Utilities.AggregateRoot"/> por su ID como <see cref="Guid"/> y versión.
     /// </summary>
     /// <param name="aggregateId"></param>
     /// <param name="version"></param>
@@ -71,7 +71,7 @@ public interface IEventStore
         int version, CancellationToken cancellationToken) where TAggregateRoot : AggregateRoot, new();
 
     /// <summary>
-    /// Obtiene un <see cref="AggregateRoot"/> por su ID y un desplazamiento de tiempo opcional.
+    /// Obtiene un <see cref="Blog.Tests.Utilities.AggregateRoot"/> por su ID y un desplazamiento de tiempo opcional.
     /// </summary>
     /// <param name="aggregateId"></param>
     /// <param name="timeOffset"></param>
@@ -82,7 +82,7 @@ public interface IEventStore
         DateTimeOffset? timeOffset, CancellationToken cancellationToken) where TAggregateRoot : AggregateRoot, new();
 
     /// <summary>
-    /// Obtiene un <see cref="AggregateRoot"/> por su ID como <see cref="Guid"/> y un desplazamiento de tiempo opcional.
+    /// Obtiene un <see cref="Blog.Tests.Utilities.AggregateRoot"/> por su ID como <see cref="Guid"/> y un desplazamiento de tiempo opcional.
     /// </summary>
     /// <param name="aggregateId"></param>
     /// <param name="timeOffset"></param>

@@ -1,4 +1,4 @@
-﻿namespace Blog.Tests.Utilities;
+﻿namespace Blog.Dominio;
 
 public abstract class AggregateRoot
 {

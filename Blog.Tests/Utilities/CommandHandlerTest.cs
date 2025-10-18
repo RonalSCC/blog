@@ -1,4 +1,6 @@
-﻿namespace Blog.Tests.Utilities;
+﻿using Blog.Dominio.Abstractions.EventSourcing;
+
+namespace Blog.Tests.Utilities;
 
 public abstract class CommandHandlerTest<TCommand> : CommandHandlerTestBase
 {

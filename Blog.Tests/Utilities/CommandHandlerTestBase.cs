@@ -1,6 +1,7 @@
 ﻿
 using AwesomeAssertions;
 using AwesomeAssertions.Equivalency;
+using Blog.Dominio;
 
 namespace Blog.Tests.Utilities;
 
