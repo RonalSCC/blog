@@ -54,4 +54,19 @@ public class AddBlockTests : CommandHandlerTestAsync<ArticleCommands.AddBlock>
         Then(new ArticleEvents.BlockAdded(_aggregateId, addBlockCommand.Contenido, addBlockCommand.Type));
         
     }
+
+    [Fact]
+    public async Task Si_GuardanUnBloqueDeTipoTextoConMasDe200Caracteres_Debe_GenerarExcepcion()
+    {
+        Given(new ArticleEvents.ArticleInitiated(_aggregateId, 
+            "My fisrt article", [new object()], [new object()], [new object()], DateTime.UtcNow));
+
+        var longContent = new string('a', 2001);
+        var addBlockCommand = new ArticleCommands.AddBlock(_aggregateId, longContent, Block.BlockType.Text);
+        
+        var caller = () => When(addBlockCommand);
+        
+        await caller.Should()
+            .ThrowAsync<AddBlockException>().WithMessage(Block.THE_CONTENT_OF_A_TEXT_BLOCK_CANNOT_EXCEED_2000_CHARACTERS);
+    }
 }

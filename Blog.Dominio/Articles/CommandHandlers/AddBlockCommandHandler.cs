@@ -7,16 +7,19 @@ public class AddBlockCommandHandler(IEventStore eventStore) : ICommandHandlerAsy
 {
     public async Task HandleAsync(ArticleCommands.AddBlock command, CancellationToken ct)
     {
-        CheckForEmptyBlockContent(command);
+        CheckForEmptyBlockContentOrLengthExceed(command.Contenido);
         await GetArticleOrExceptionIfNotExists(command, ct);
         
         eventStore.AppendEvent(command.Id, new ArticleEvents.BlockAdded(command.Id, command.Contenido, command.Type));
     }
 
-    private static void CheckForEmptyBlockContent(ArticleCommands.AddBlock command)
+    private static void CheckForEmptyBlockContentOrLengthExceed(string contenido)
     {
-        if(string.IsNullOrEmpty(command.Contenido))
+        if(string.IsNullOrEmpty(contenido))
             throw new AddBlockException(Block.NOT_ADD_BLOCK_WITHOUT_CONTENT);
+        
+        if(contenido.Length > 2000)
+            throw new AddBlockException(Block.THE_CONTENT_OF_A_TEXT_BLOCK_CANNOT_EXCEED_2000_CHARACTERS);
     }
 
     private async Task<Articles.Article> GetArticleOrExceptionIfNotExists(ArticleCommands.AddBlock command, CancellationToken ct)
