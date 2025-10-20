@@ -2,6 +2,7 @@
 
 ## Articulos
 
+- [x] Un articulo no puede tener un ID vacio
 - [x] Un articulo no puede tener un titulo vacio
 - [x] Un articulo debe tener al menos un bloque
 - [x] Un articulo no puede tener más 20 bloques.

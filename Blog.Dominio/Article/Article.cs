@@ -12,6 +12,8 @@ public class InitArticle : AggregateRoot
     public const string DEBE_CONTENER_AL_MENOS_UN_TAG_DESCRIPTIVO =
         "El articulo debe contener al menos un tag descriptivo.";
 
+    public const string EL_ID_NO_PUEDE_SER_VACIO = "El Id del articulo no puede ser vacío.";
+
     public DateTime CreatedAt { get; private set; }
 
     public void Apply(ArticleEvents.ArticleInitiated @event)

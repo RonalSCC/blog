@@ -18,6 +18,15 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
         _commandBuilder = new InitArticleBuilder().WithId(_aggregateId);
     }
     
+    [Fact]
+    public void Si_CreanUnArticuloConIdVacio_Debe_GenerarUnaExcepcion()
+    {
+        var command = _commandBuilder.WithId("").Build();
+        var caller = () => When(command);
+
+        caller.Should().ThrowExactly<InitArticleException>().WithMessage(InitArticle.EL_ID_NO_PUEDE_SER_VACIO);
+    }
+    
     [Theory]
     [InlineData("")]
     [InlineData(null)]
