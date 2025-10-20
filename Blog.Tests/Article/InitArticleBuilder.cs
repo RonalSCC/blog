@@ -1,4 +1,4 @@
-﻿using Blog.Dominio.Article;
+﻿using Blog.Dominio.Articles;
 
 namespace Blog.Tests.Article;
 

@@ -1,19 +1,19 @@
 ﻿using AwesomeAssertions;
 using Blog.Abstractions.EventSourcing;
-using Blog.Dominio.Article;
-using Blog.Dominio.Article.CommandHandlers;
-using Blog.Dominio.Article.Exceptions;
+using Blog.Dominio.Articles;
+using Blog.Dominio.Articles.CommandHandlers;
+using Blog.Dominio.Articles.Exceptions;
 using Blog.Tests.Utilities;
 
 namespace Blog.Tests.Article;
 
-public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
+public class ArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
 {
     protected override ICommandHandler<ArticleCommands.InitArticle> Handler => new InitArticleCommandHandler(eventStore);
 
     private readonly InitArticleBuilder _commandBuilder;
 
-    public InitArticleTests()
+    public ArticleTests()
     {
         _commandBuilder = new InitArticleBuilder().WithId(_aggregateId);
     }
@@ -24,7 +24,7 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
         var command = _commandBuilder.WithId("").Build();
         var caller = () => When(command);
 
-        caller.Should().ThrowExactly<InitArticleException>().WithMessage(InitArticle.EL_ID_NO_PUEDE_SER_VACIO);
+        caller.Should().ThrowExactly<InitArticleException>().WithMessage(Dominio.Articles.Article.EL_ID_NO_PUEDE_SER_VACIO);
     }
     
     [Theory]
@@ -37,7 +37,7 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
         var caller = () => When(command);
 
         caller.Should()
-            .ThrowExactly<InitArticleException>().WithMessage(InitArticle.EL_TITULO_NO_PUEDE_SER_VACIO);
+            .ThrowExactly<InitArticleException>().WithMessage(Dominio.Articles.Article.EL_TITULO_NO_PUEDE_SER_VACIO);
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
         var caller = () => When(command);
 
         caller.Should()
-            .ThrowExactly<InitArticleException>().WithMessage(InitArticle.DEBE_CONTENER_AL_MENOS_UN_BLOQUE);
+            .ThrowExactly<InitArticleException>().WithMessage(Dominio.Articles.Article.DEBE_CONTENER_AL_MENOS_UN_BLOQUE);
     }
 
     [Fact]
@@ -65,7 +65,7 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
         var caller = () => When(command);
 
         caller.Should()
-            .ThrowExactly<InitArticleException>().WithMessage(InitArticle.NO_PUEDE_TENER_MAS_DE_20_BLOQUES);
+            .ThrowExactly<InitArticleException>().WithMessage(Dominio.Articles.Article.NO_PUEDE_TENER_MAS_DE_20_BLOQUES);
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
         var caller = () => When(command);
 
         caller.Should()
-            .ThrowExactly<InitArticleException>().WithMessage(InitArticle.DEBE_CONTENER_AL_MENOS_UN_AUTOR);
+            .ThrowExactly<InitArticleException>().WithMessage(Dominio.Articles.Article.DEBE_CONTENER_AL_MENOS_UN_AUTOR);
     }
 
     [Fact]
@@ -87,7 +87,7 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
         var caller = () => When(command);
 
         caller.Should().ThrowExactly<InitArticleException>()
-            .WithMessage(InitArticle.DEBE_CONTENER_AL_MENOS_UN_TAG_DESCRIPTIVO);
+            .WithMessage(Dominio.Articles.Article.DEBE_CONTENER_AL_MENOS_UN_TAG_DESCRIPTIVO);
     }
 
     [Fact]
@@ -100,7 +100,13 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
 
         Then(_aggregateId,
             new ArticleEvents.ArticleInitiated(_aggregateId, command.Title, command.Block, command.Authors, command.Tags, command.CreatedAt));
-        And<InitArticle, string>(art => art.Id, _aggregateId);
-        And<InitArticle, DateTime>(art => art.CreatedAt, createdAt);
+        And<Dominio.Articles.Article, string>(art => art.Id, _aggregateId);
+        And<Dominio.Articles.Article, string>(art => art.Title, command.Title);
+        And<Dominio.Articles.Article, IReadOnlyList<object>>(art => art.Block, command.Block);
+        And<Dominio.Articles.Article, IReadOnlyList<object>>(art => art.Authors, command.Authors);
+        And<Dominio.Articles.Article, IReadOnlyList<object>>(art => art.Tags, command.Tags);
+        And<Dominio.Articles.Article, DateTime>(art => art.CreatedAt, createdAt);
     }
+    
+    
 }

@@ -1,4 +1,4 @@
-﻿namespace Blog.Dominio.Article;
+﻿namespace Blog.Dominio.Articles;
 
 public abstract record ArticleCommands
 {
@@ -11,5 +11,5 @@ public abstract record ArticleCommands
         List<object> Tags,
         DateTime CreatedAt) : ArticleCommands;
 
-    public record AddBlock() : ArticleCommands;
+    public record AddBlock(string Id, string Contenido) : ArticleCommands;
 }

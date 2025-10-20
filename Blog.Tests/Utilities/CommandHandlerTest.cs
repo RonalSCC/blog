@@ -19,19 +19,19 @@ public abstract class CommandHandlerTest<TCommand> : CommandHandlerTestBase
     }
 }
 
-public abstract class CommandHandlerTest<TCommand, TResult> : CommandHandlerTestBase
+public abstract class CommandHandlerTestAsync<TCommand> : CommandHandlerTestBase
 {
     /// <summary>
     /// The command handler, to be provided in the Test class.
     /// This to account for additional injections
     /// </summary>
-    protected abstract ICommandHandler<TCommand, TResult> Handler { get; }
+    protected abstract ICommandHandlerAsync<TCommand> Handler { get; }
 
     /// <summary>
     /// Triggers the handling of a command against the configured events.
     /// </summary>
-    protected TResult When(TCommand command)
+    protected async Task When(TCommand command)
     {
-        return Handler.Handle(command);
+        await Handler.HandleAsync(command, CancellationToken.None);
     }
 }

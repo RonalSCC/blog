@@ -1,4 +1,4 @@
-﻿namespace Blog.Dominio.Article;
+﻿namespace Blog.Dominio.Articles;
 
 public abstract record ArticleEvents
 {
