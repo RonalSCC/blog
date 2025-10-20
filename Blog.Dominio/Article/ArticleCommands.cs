@@ -10,4 +10,6 @@ public abstract record ArticleCommands
         List<object> Authors,
         List<object> Tags,
         DateTime CreatedAt) : ArticleCommands;
+
+    public record AddBlock() : ArticleCommands;
 }

@@ -8,7 +8,7 @@ public class InitArticleCommandHandler(IEventStore eventStore) : ICommandHandler
     public void Handle(ArticleCommands.InitArticle command)
     {
         AssertIfTitleIsNotEmpty(command);
-        
+
         AssertIfTitleIsEmpty(command.Title);
 
         AssertIfLengthOfBlocksIsCorrect(command.Block);
@@ -18,12 +18,13 @@ public class InitArticleCommandHandler(IEventStore eventStore) : ICommandHandler
         AssertTagLengthIsCorrect(command);
 
         eventStore.AppendEvent(command.Id,
-            new ArticleEvents.ArticleInitiated(command.Id, command.Title, command.Block, command.Authors, command.Tags, command.CreatedAt));
+            new ArticleEvents.ArticleInitiated(command.Id, command.Title, command.Block, command.Authors, command.Tags,
+                command.CreatedAt));
     }
 
     private static void AssertIfTitleIsNotEmpty(ArticleCommands.InitArticle command)
     {
-        if(string.IsNullOrEmpty(command.Id))
+        if (string.IsNullOrEmpty(command.Id))
             throw new InitArticleException(InitArticle.EL_ID_NO_PUEDE_SER_VACIO);
     }
 

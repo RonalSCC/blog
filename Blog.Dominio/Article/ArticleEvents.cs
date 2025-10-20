@@ -11,5 +11,4 @@ public abstract record ArticleEvents
         List<object> Authors,
         List<object> Tags,
         DateTime CreatedAt) : ArticleEvents;
-    
 }
