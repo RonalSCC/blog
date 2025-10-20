@@ -15,10 +15,10 @@
 
 ## Bloques
 
-- [ ] No se puede agregar un bloque a un articulo que no exista.
+- [x] No se puede agregar un bloque a un articulo que no exista.
 - [x] Un bloque no puede tener el contenido vacio.
-- [ ] Un bloque debe ser de un tipo especifico
-- [ ] Un bloque debe iniciar en un tipo de explicación. 
+- [x] Se debe agregar un bloque a un articulo que tenga contenido valido.
+- [x] Un bloque debe crearse con un tipo especifico
 - [ ] Si un bloque es de tipo texto no puede tener más de 2000 caracteres.
 - [ ] Si un bloque es de tipo imagen debe tener una URL valida.
 - [ ] Si un bloque es de tipo codigo debe tener un lenguaje de programacion especifico.

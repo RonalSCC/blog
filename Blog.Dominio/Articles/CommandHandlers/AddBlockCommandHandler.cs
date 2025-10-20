@@ -7,8 +7,16 @@ public class AddBlockCommandHandler(IEventStore eventStore) : ICommandHandlerAsy
 {
     public async Task HandleAsync(ArticleCommands.AddBlock command, CancellationToken ct)
     {
+        CheckForEmptyBlockContent(command);
         await GetArticleOrExceptionIfNotExists(command, ct);
-        throw new AddBlockException(Block.NOT_ADD_BLOCK_WITHOUT_CONTENT);
+        
+        eventStore.AppendEvent(command.Id, new ArticleEvents.BlockAdded(command.Id, command.Contenido, command.Type));
+    }
+
+    private static void CheckForEmptyBlockContent(ArticleCommands.AddBlock command)
+    {
+        if(string.IsNullOrEmpty(command.Contenido))
+            throw new AddBlockException(Block.NOT_ADD_BLOCK_WITHOUT_CONTENT);
     }
 
     private async Task<Articles.Article> GetArticleOrExceptionIfNotExists(ArticleCommands.AddBlock command, CancellationToken ct)

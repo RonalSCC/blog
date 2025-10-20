@@ -11,5 +11,5 @@ public abstract record ArticleCommands
         List<object> Tags,
         DateTime CreatedAt) : ArticleCommands;
 
-    public record AddBlock(string Id, string Contenido) : ArticleCommands;
+    public record AddBlock(string Id, string Contenido, Block.BlockType Type) : ArticleCommands;
 }

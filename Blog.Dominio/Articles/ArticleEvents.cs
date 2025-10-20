@@ -11,4 +11,6 @@ public abstract record ArticleEvents
         List<object> Authors,
         List<object> Tags,
         DateTime CreatedAt) : ArticleEvents;
+
+    public record BlockAdded(string Id, string Content, Block.BlockType Type);
 }
