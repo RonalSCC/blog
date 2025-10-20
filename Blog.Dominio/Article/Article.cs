@@ -1,7 +1,6 @@
 ﻿using Blog.Abstractions;
-using Blog.Dominio.Events;
 
-namespace Blog.Dominio;
+namespace Blog.Dominio.Article;
 
 public class InitArticle : AggregateRoot
 {

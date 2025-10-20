@@ -1,4 +1,4 @@
-﻿namespace Blog.Dominio.Comandos;
+﻿namespace Blog.Dominio.Article;
 
 public abstract record ArticleCommands
 {

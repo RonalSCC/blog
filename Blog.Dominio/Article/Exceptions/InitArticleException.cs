@@ -1,3 +1,3 @@
-﻿namespace Blog.Dominio.Exceptions;
+﻿namespace Blog.Dominio.Article.Exceptions;
 
 public class InitArticleException(string message) : Exception(message);

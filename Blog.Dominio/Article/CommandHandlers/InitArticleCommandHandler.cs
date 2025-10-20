@@ -1,9 +1,7 @@
 ﻿using Blog.Abstractions.EventSourcing;
-using Blog.Dominio.Comandos;
-using Blog.Dominio.Events;
-using Blog.Dominio.Exceptions;
+using Blog.Dominio.Article.Exceptions;
 
-namespace Blog.Dominio.CommandHandlers;
+namespace Blog.Dominio.Article.CommandHandlers;
 
 public class InitArticleCommandHandler(IEventStore eventStore) : ICommandHandler<ArticleCommands.InitArticle>
 {

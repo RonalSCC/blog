@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Blog.Abstractions\Blog.Abstractions.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Article\CommandHandlers\" />
+    </ItemGroup>
+
 </Project>

@@ -1,9 +1,8 @@
 ﻿using AwesomeAssertions;
 using Blog.Abstractions.EventSourcing;
-using Blog.Dominio.Comandos;
-using Blog.Dominio.CommandHandlers;
-using Blog.Dominio.Events;
-using Blog.Dominio.Exceptions;
+using Blog.Dominio.Article;
+using Blog.Dominio.Article.CommandHandlers;
+using Blog.Dominio.Article.Exceptions;
 using Blog.Tests.Utilities;
 
 namespace Blog.Tests.Article;
@@ -29,7 +28,7 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
         var caller = () => When(command);
 
         caller.Should()
-            .ThrowExactly<InitArticleException>().WithMessage(Dominio.InitArticle.EL_TITULO_NO_PUEDE_SER_VACIO);
+            .ThrowExactly<InitArticleException>().WithMessage(InitArticle.EL_TITULO_NO_PUEDE_SER_VACIO);
     }
 
     [Fact]
@@ -40,7 +39,7 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
         var caller = () => When(command);
 
         caller.Should()
-            .ThrowExactly<InitArticleException>().WithMessage(Dominio.InitArticle.DEBE_CONTENER_AL_MENOS_UN_BLOQUE);
+            .ThrowExactly<InitArticleException>().WithMessage(InitArticle.DEBE_CONTENER_AL_MENOS_UN_BLOQUE);
     }
 
     [Fact]
@@ -57,7 +56,7 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
         var caller = () => When(command);
 
         caller.Should()
-            .ThrowExactly<InitArticleException>().WithMessage(Dominio.InitArticle.NO_PUEDE_TENER_MAS_DE_20_BLOQUES);
+            .ThrowExactly<InitArticleException>().WithMessage(InitArticle.NO_PUEDE_TENER_MAS_DE_20_BLOQUES);
     }
 
     [Fact]
@@ -68,7 +67,7 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
         var caller = () => When(command);
 
         caller.Should()
-            .ThrowExactly<InitArticleException>().WithMessage(Dominio.InitArticle.DEBE_CONTENER_AL_MENOS_UN_AUTOR);
+            .ThrowExactly<InitArticleException>().WithMessage(InitArticle.DEBE_CONTENER_AL_MENOS_UN_AUTOR);
     }
 
     [Fact]
@@ -79,7 +78,7 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
         var caller = () => When(command);
 
         caller.Should().ThrowExactly<InitArticleException>()
-            .WithMessage(Dominio.InitArticle.DEBE_CONTENER_AL_MENOS_UN_TAG_DESCRIPTIVO);
+            .WithMessage(InitArticle.DEBE_CONTENER_AL_MENOS_UN_TAG_DESCRIPTIVO);
     }
 
     [Fact]
@@ -92,7 +91,7 @@ public class InitArticleTests : CommandHandlerTest<ArticleCommands.InitArticle>
 
         Then(_aggregateId,
             new ArticleEvents.ArticleInitiated(_aggregateId, command.Title, command.Block, command.Authors, command.Tags, command.CreatedAt));
-        And<Dominio.InitArticle, string>(art => art.Id, _aggregateId);
-        And<Dominio.InitArticle, DateTime>(art => art.CreatedAt, createdAt);
+        And<InitArticle, string>(art => art.Id, _aggregateId);
+        And<InitArticle, DateTime>(art => art.CreatedAt, createdAt);
     }
 }
