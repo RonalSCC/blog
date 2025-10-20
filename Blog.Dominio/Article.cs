@@ -3,7 +3,7 @@ using Blog.Dominio.Events;
 
 namespace Blog.Dominio;
 
-public class Article : AggregateRoot
+public class InitArticle : AggregateRoot
 {
     public const string NO_PUEDE_TENER_MAS_DE_20_BLOQUES = "El articulo no puede contener más de 20 bloques";
     public const string DEBE_CONTENER_AL_MENOS_UN_BLOQUE = "No se puede crear un articulo sin bloques.";
